@@ -31,6 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Index));
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.ProgressLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Input1 = new System.Windows.Forms.TextBox();
+            this.AutoCompleteSuggestionBox = new System.Windows.Forms.CheckedListBox();
+            this.AccountInfoDisplay = new System.Windows.Forms.CheckedListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkBox1
@@ -57,17 +65,102 @@
             this.checkBox2.Text = "Has Password";
             this.checkBox2.UseVisualStyleBackColor = true;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgressBar,
+            this.ProgressLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 406);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(352, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(100, 16);
+            // 
+            // ProgressLabel
+            // 
+            this.ProgressLabel.Name = "ProgressLabel";
+            this.ProgressLabel.Size = new System.Drawing.Size(38, 17);
+            this.ProgressLabel.Text = "0/null";
+            // 
+            // Input1
+            // 
+            this.Input1.BackColor = System.Drawing.Color.LightGray;
+            this.Input1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Input1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.Input1.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.Input1.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.Input1.Location = new System.Drawing.Point(13, 37);
+            this.Input1.MaxLength = 45;
+            this.Input1.Name = "Input1";
+            this.Input1.PlaceholderText = "Input a title";
+            this.Input1.Size = new System.Drawing.Size(327, 26);
+            this.Input1.TabIndex = 4;
+            this.Input1.Tag = "InputType";
+            this.Input1.WordWrap = false;
+            this.Input1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Input1_KeyUp);
+            // 
+            // AutoCompleteSuggestionBox
+            // 
+            this.AutoCompleteSuggestionBox.BackColor = System.Drawing.Color.Gainsboro;
+            this.AutoCompleteSuggestionBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AutoCompleteSuggestionBox.CheckOnClick = true;
+            this.AutoCompleteSuggestionBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AutoCompleteSuggestionBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AutoCompleteSuggestionBox.Location = new System.Drawing.Point(13, 69);
+            this.AutoCompleteSuggestionBox.Name = "AutoCompleteSuggestionBox";
+            this.AutoCompleteSuggestionBox.Size = new System.Drawing.Size(327, 137);
+            this.AutoCompleteSuggestionBox.TabIndex = 2;
+            this.AutoCompleteSuggestionBox.Tag = "InputType";
+            this.AutoCompleteSuggestionBox.Visible = false;
+            this.AutoCompleteSuggestionBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.AutoCompleteSuggestionBox_ItemCheck);
+            // 
+            // AccountInfoDisplay
+            // 
+            this.AccountInfoDisplay.BackColor = System.Drawing.Color.Gainsboro;
+            this.AccountInfoDisplay.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.AccountInfoDisplay.CheckOnClick = true;
+            this.AccountInfoDisplay.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AccountInfoDisplay.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.AccountInfoDisplay.Location = new System.Drawing.Point(13, 287);
+            this.AccountInfoDisplay.Name = "AccountInfoDisplay";
+            this.AccountInfoDisplay.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.AccountInfoDisplay.Size = new System.Drawing.Size(327, 107);
+            this.AccountInfoDisplay.TabIndex = 5;
+            this.AccountInfoDisplay.Tag = "InputType";
+            this.AccountInfoDisplay.SelectedIndexChanged += new System.EventHandler(this.AccountInfoDisplay_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(16, 222);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "label1";
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(349, 543);
+            this.ClientSize = new System.Drawing.Size(352, 428);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.AccountInfoDisplay);
+            this.Controls.Add(this.AutoCompleteSuggestionBox);
+            this.Controls.Add(this.Input1);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Index";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Local Password Manager";
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -77,5 +170,12 @@
 
         private CheckBox checkBox1;
         private CheckBox checkBox2;
+        private StatusStrip statusStrip1;
+        private ToolStripProgressBar ProgressBar;
+        private ToolStripStatusLabel ProgressLabel;
+        private TextBox Input1;
+        private CheckedListBox AutoCompleteSuggestionBox;
+        private CheckedListBox AccountInfoDisplay;
+        private Label label1;
     }
 }
