@@ -105,48 +105,54 @@ namespace Local_Password_Manager
 
         public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-
-            string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-            creationDateLabel.Visible = true;
-            lastUsedLabel.Visible = true;
-            commentLabel.Visible = true;
-            usernameLabel.Visible = true;
-            passwordLabel.Visible = true;   
-            Input1.Text = "";
-            AutoCompleteSuggestionBox.Visible = false;
-
-            using (StreamReader r = new StreamReader("1ab2ba2.json"))
+            try
             {
-                JObject names = JObject.Parse(r.ReadToEnd());
-                List<string> allNames = new List<string>();
-                foreach (KeyValuePair<string, JToken> title in names)
+                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+                creationDateLabel.Visible = true;
+                lastUsedLabel.Visible = true;
+                commentLabel.Visible = true;
+                usernameLabel.Visible = true;
+                passwordLabel.Visible = true;
+                Input1.Text = "";
+                AutoCompleteSuggestionBox.Visible = false;
+
+                using (StreamReader r = new StreamReader("1ab2ba2.json"))
                 {
-                    allNames.Add(title.Key.ToString());
-                }
-
-
-
-                creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
-                lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
-                commentLabel.Text = $@"comments:    {names[selectedKey]["comments"].ToString()}";
-
-                usernameLabel.Text = $@"Username:   {names[selectedKey]["username"].ToString()}";
-
-                string pass = "";
-                for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
-                {
-                    if (i < names[selectedKey]["password"].ToString().Count()/10)
+                    JObject names = JObject.Parse(r.ReadToEnd());
+                    List<string> allNames = new List<string>();
+                    foreach (KeyValuePair<string, JToken> title in names)
                     {
-                        pass = pass + names[selectedKey]["password"].ToString()[i];
+                        allNames.Add(title.Key.ToString());
                     }
-                    else
-                    {
-                        pass = pass + "*";
-                    }
-                }
 
-                passwordLabel.Text = $@"Password:   {pass}";
+
+
+                    creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
+                    lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
+                    commentLabel.Text = $@"comments:    {names[selectedKey]["comments"].ToString()}";
+
+                    usernameLabel.Text = $@"Username:   {names[selectedKey]["username"].ToString()}";
+
+                    string pass = "";
+                    for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
+                    {
+                        if (i < names[selectedKey]["password"].ToString().Count() / 10)
+                        {
+                            pass = pass + names[selectedKey]["password"].ToString()[i];
+                        }
+                        else
+                        {
+                            pass = pass + "*";
+                        }
+                    }
+
+                    passwordLabel.Text = $@"Password:   {pass}";
+
+                }
+            }
+            catch
+            {
+
             }
         }
 
@@ -190,6 +196,5 @@ namespace Local_Password_Manager
         {
             updateLabels("password");
         }
-
     }
 }
