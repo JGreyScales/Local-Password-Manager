@@ -1,6 +1,6 @@
 namespace Local_Password_Manager
 #pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
-
+#pragma warning disable CS8602 // Dereference of a possibly null reference.
 {
     using Newtonsoft.Json.Linq;
 
@@ -21,6 +21,11 @@ namespace Local_Password_Manager
             ProgressBar.Value = 0;
             ProgressLabel.Text = "0/null";
             AutoCompleteSuggestionBox.Items.Clear();
+            creationDateLabel.Visible = false;
+            lastUsedLabel.Visible = false;
+            commentLabel.Visible = false;
+            usernameLabel.Visible = false;  
+            passwordLabel.Visible = false;
         }
 
         private void Input1_KeyUp(object sender, KeyEventArgs e)
@@ -98,17 +103,16 @@ namespace Local_Password_Manager
             return results;
         }
 
-        private void AccountInfoDisplay_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
+        public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
 
 
             string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-            clearAuto();
+            creationDateLabel.Visible = true;
+            lastUsedLabel.Visible = true;
+            commentLabel.Visible = true;
+            usernameLabel.Visible = true;
+            passwordLabel.Visible = true;   
             Input1.Text = "";
             AutoCompleteSuggestionBox.Visible = false;
 
@@ -121,11 +125,71 @@ namespace Local_Password_Manager
                     allNames.Add(title.Key.ToString());
                 }
 
-                creationDateLabel.Text = names[selectedKey]["creation-date"].ToString();
-                lastUsedLabel.Text = names[selectedKey]["last-used-date"].ToString();
 
 
+                creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
+                lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
+                commentLabel.Text = $@"comments:    {names[selectedKey]["comments"].ToString()}";
+
+                usernameLabel.Text = $@"Username:   {names[selectedKey]["username"].ToString()}";
+
+                string pass = "";
+                for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
+                {
+                    if (i < names[selectedKey]["password"].ToString().Count()/10)
+                    {
+                        pass = pass + names[selectedKey]["password"].ToString()[i];
+                    }
+                    else
+                    {
+                        pass = pass + "*";
+                    }
+                }
+
+                passwordLabel.Text = $@"Password:   {pass}";
             }
         }
+
+        private void updateLabels(string KEY)
+        {
+            string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+            using (StreamReader r = new StreamReader("1ab2ba2.json"))
+            {
+                JObject names = JObject.Parse(r.ReadToEnd());
+                List<string> allNames = new List<string>();
+                foreach (KeyValuePair<string, JToken> title in names)
+                {
+                    allNames.Add(title.Key.ToString());
+                }
+                Clipboard.SetText(names[selectedKey][KEY].ToString());
+            }
+            
+        }
+
+        private void creationDateLabel_Click(object sender, EventArgs e)
+        {
+            updateLabels("creation-date");
+        }
+
+        private void lastUsedLabel_Click(object sender, EventArgs e)
+        {
+            updateLabels("last-used-date");
+        }
+
+        private void commentLabel_Click(object sender, EventArgs e)
+        {
+            updateLabels("comments");
+        }
+
+        private void usernameLabel_Click(object sender, EventArgs e)
+        {
+            updateLabels("username");
+        }
+
+        private void passwordLabel_Click(object sender, EventArgs e)
+        {
+            updateLabels("password");
+        }
+
     }
 }
