@@ -37,7 +37,9 @@
             this.Input1 = new System.Windows.Forms.TextBox();
             this.AutoCompleteSuggestionBox = new System.Windows.Forms.CheckedListBox();
             this.AccountInfoDisplay = new System.Windows.Forms.CheckedListBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.creationDateLabel = new System.Windows.Forms.Label();
+            this.commentLabel = new System.Windows.Forms.Label();
+            this.lastUsedLabel = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -118,6 +120,7 @@
             this.AutoCompleteSuggestionBox.Tag = "InputType";
             this.AutoCompleteSuggestionBox.Visible = false;
             this.AutoCompleteSuggestionBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.AutoCompleteSuggestionBox_ItemCheck);
+            this.AutoCompleteSuggestionBox.SelectedIndexChanged += new System.EventHandler(this.AutoCompleteSuggestionBox_SelectedIndexChanged);
             // 
             // AccountInfoDisplay
             // 
@@ -134,21 +137,44 @@
             this.AccountInfoDisplay.Tag = "InputType";
             this.AccountInfoDisplay.SelectedIndexChanged += new System.EventHandler(this.AccountInfoDisplay_SelectedIndexChanged);
             // 
-            // label1
+            // creationDateLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 222);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "label1";
+            this.creationDateLabel.AutoSize = true;
+            this.creationDateLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.creationDateLabel.Location = new System.Drawing.Point(13, 209);
+            this.creationDateLabel.Name = "creationDateLabel";
+            this.creationDateLabel.Size = new System.Drawing.Size(82, 15);
+            this.creationDateLabel.TabIndex = 6;
+            this.creationDateLabel.Text = "Creation Date:";
+            // 
+            // commentLabel
+            // 
+            this.commentLabel.AutoSize = true;
+            this.commentLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.commentLabel.Location = new System.Drawing.Point(13, 269);
+            this.commentLabel.Name = "commentLabel";
+            this.commentLabel.Size = new System.Drawing.Size(69, 15);
+            this.commentLabel.TabIndex = 7;
+            this.commentLabel.Text = "Comments:";
+            // 
+            // lastUsedLabel
+            // 
+            this.lastUsedLabel.AutoSize = true;
+            this.lastUsedLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.lastUsedLabel.Location = new System.Drawing.Point(13, 239);
+            this.lastUsedLabel.Name = "lastUsedLabel";
+            this.lastUsedLabel.Size = new System.Drawing.Size(60, 15);
+            this.lastUsedLabel.TabIndex = 8;
+            this.lastUsedLabel.Text = "Last Used:";
             // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(352, 428);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lastUsedLabel);
+            this.Controls.Add(this.commentLabel);
+            this.Controls.Add(this.creationDateLabel);
             this.Controls.Add(this.AccountInfoDisplay);
             this.Controls.Add(this.AutoCompleteSuggestionBox);
             this.Controls.Add(this.Input1);
@@ -176,6 +202,8 @@
         private TextBox Input1;
         private CheckedListBox AutoCompleteSuggestionBox;
         private CheckedListBox AccountInfoDisplay;
-        private Label label1;
+        private Label creationDateLabel;
+        private Label commentLabel;
+        private Label lastUsedLabel;
     }
 }

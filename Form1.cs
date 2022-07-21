@@ -1,4 +1,6 @@
 namespace Local_Password_Manager
+#pragma warning disable CS8619 // Nullability of reference types in value doesn't match target type.
+
 {
     using Newtonsoft.Json.Linq;
 
@@ -14,28 +16,36 @@ namespace Local_Password_Manager
 
         }
 
-        private void Input1_KeyUp(object sender, KeyEventArgs e)
+        private void clearAuto()
         {
             ProgressBar.Value = 0;
             ProgressLabel.Text = "0/null";
-            if (Input1.Text.Length > 0){
+            AutoCompleteSuggestionBox.Items.Clear();
+        }
+
+        private void Input1_KeyUp(object sender, KeyEventArgs e)
+        {
+            clearAuto();
+            if (Input1.Text.Length > 0)
+            {
                 AutoCompleteSuggestionBox.Visible = true;
                 var predicted = namePrediction(Input1.Text);
+
+
                 for (int i = 0; i < predicted.Count; i++)
                 {
-                    if (AutoCompleteSuggestionBox.Items.IndexOf(predicted[i]) == -1)
-                    {
-                        AutoCompleteSuggestionBox.Items.Add(predicted[i]);
-                    }
+                    AutoCompleteSuggestionBox.Items.Add(predicted[i]);
                 }
 
             }
 
 
-            else{AutoCompleteSuggestionBox.Visible = false;}
+            else { AutoCompleteSuggestionBox.Visible = false; }
         }
 
-        private List<string> namePrediction(string key)
+
+
+        public List<string> namePrediction(string key)
         {
 
             var results = new List<string>();
@@ -43,7 +53,7 @@ namespace Local_Password_Manager
             {
                 JObject names = JObject.Parse(r.ReadToEnd());
                 List<string> allNames = new List<string>();
-                foreach(KeyValuePair<string, JToken> title in names)
+                foreach (KeyValuePair<string, JToken> title in names)
                 {
                     allNames.Add(title.Key.ToString());
                 }
@@ -68,20 +78,20 @@ namespace Local_Password_Manager
                     }
                     if (score > 0)
                     {
-                    valueScores.Add(allNames[i], score);
+                        valueScores.Add(allNames[i], score);
                     }
-                    label1.Text = i.ToString();
-                    ProgressLabel.Text = ($@"{(50/(i+1)).ToString()}/{allNames.Count.ToString()}");
-                    ProgressBar.Value = 50 / (i + 1);
+                    ProgressLabel.Text = ($@"{(i + 1).ToString()}/{allNames.Count.ToString()}");
+                    ProgressBar.Value = ((i + 1) / allNames.Count()) * 100;
                 }
 
 
-                foreach (KeyValuePair<string, int> scoredObject in valueScores)
+                var list = valueScores.Values.OrderByDescending(x => x).ToList();
+                var sortedData = valueScores.OrderBy(x => list.IndexOf(x.Value));
+                foreach (KeyValuePair<string, int> value in sortedData)
                 {
+                    results.Add(value.Key.ToString());
 
                 }
-               
-
             }
 
 
@@ -92,16 +102,30 @@ namespace Local_Password_Manager
         {
 
         }
+
+        private void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+
+            string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+            clearAuto();
+            Input1.Text = "";
+            AutoCompleteSuggestionBox.Visible = false;
+
+            using (StreamReader r = new StreamReader("1ab2ba2.json"))
+            {
+                JObject names = JObject.Parse(r.ReadToEnd());
+                List<string> allNames = new List<string>();
+                foreach (KeyValuePair<string, JToken> title in names)
+                {
+                    allNames.Add(title.Key.ToString());
+                }
+
+                creationDateLabel.Text = names[selectedKey]["creation-date"].ToString();
+                lastUsedLabel.Text = names[selectedKey]["last-used-date"].ToString();
+
+
+            }
+        }
     }
-
 }
-
-//string data -> list
-//.count array total -> return total
-//select top 4 
-
-
-//return (from p in data
-//where p.IndexOf(prefixText, StringComparison.OrdinalIgnoreCase) >= 0
-//select p).Take<String>(count).ToArray();
-//  }
