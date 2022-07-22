@@ -158,6 +158,8 @@ namespace Local_Password_Manager
 
         private void updateLabels(string KEY)
         {
+            InteralClock.Start();
+            InternalClockValue.Text = "0";
             string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
             using (StreamReader r = new StreamReader("1ab2ba2.json"))
             {
@@ -168,6 +170,7 @@ namespace Local_Password_Manager
                     allNames.Add(title.Key.ToString());
                 }
                 Clipboard.SetText(names[selectedKey][KEY].ToString());
+                textCopiedLabel.Visible = true;
             }
             
         }
@@ -194,7 +197,19 @@ namespace Local_Password_Manager
 
         private void passwordLabel_Click(object sender, EventArgs e)
         {
+            // call decypt function, seperate send case will be needed
             updateLabels("password");
+        }
+
+        private void InteralClock_Tick(object sender, EventArgs e)
+        {
+            InternalClockValue.Text = (Int32.Parse(InternalClockValue.Text) + 1).ToString();
+            if (Int32.Parse(InternalClockValue.Text) > 39)
+            {
+                textCopiedLabel.Visible = false;
+                InteralClock.Stop();
+                InternalClockValue.Text = "0";
+            }
         }
     }
 }

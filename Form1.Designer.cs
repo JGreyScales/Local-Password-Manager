@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Index));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
@@ -39,6 +40,11 @@
             this.lastUsedLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.passwordLabel = new System.Windows.Forms.Label();
+            this.AddInfoButton = new System.Windows.Forms.Button();
+            this.RemoveInfoButton = new System.Windows.Forms.Button();
+            this.InteralClock = new System.Windows.Forms.Timer(this.components);
+            this.InternalClockValue = new System.Windows.Forms.Label();
+            this.textCopiedLabel = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,6 +111,7 @@
             // 
             this.creationDateLabel.AutoSize = true;
             this.creationDateLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.creationDateLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.creationDateLabel.Location = new System.Drawing.Point(12, 184);
             this.creationDateLabel.Name = "creationDateLabel";
             this.creationDateLabel.Size = new System.Drawing.Size(82, 15);
@@ -117,6 +124,7 @@
             // 
             this.commentLabel.AutoSize = true;
             this.commentLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.commentLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.commentLabel.Location = new System.Drawing.Point(12, 214);
             this.commentLabel.Name = "commentLabel";
             this.commentLabel.Size = new System.Drawing.Size(69, 15);
@@ -129,6 +137,7 @@
             // 
             this.lastUsedLabel.AutoSize = true;
             this.lastUsedLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.lastUsedLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.lastUsedLabel.Location = new System.Drawing.Point(12, 199);
             this.lastUsedLabel.Name = "lastUsedLabel";
             this.lastUsedLabel.Size = new System.Drawing.Size(60, 15);
@@ -141,6 +150,7 @@
             // 
             this.usernameLabel.AutoSize = true;
             this.usernameLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.usernameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.usernameLabel.Location = new System.Drawing.Point(12, 238);
             this.usernameLabel.Name = "usernameLabel";
             this.usernameLabel.Size = new System.Drawing.Size(63, 15);
@@ -153,6 +163,7 @@
             // 
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.BackColor = System.Drawing.Color.Gainsboro;
+            this.passwordLabel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.passwordLabel.Location = new System.Drawing.Point(12, 253);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(60, 15);
@@ -161,12 +172,65 @@
             this.passwordLabel.Visible = false;
             this.passwordLabel.Click += new System.EventHandler(this.passwordLabel_Click);
             // 
+            // AddInfoButton
+            // 
+            this.AddInfoButton.BackColor = System.Drawing.Color.LightGray;
+            this.AddInfoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.AddInfoButton.Location = new System.Drawing.Point(256, 187);
+            this.AddInfoButton.Name = "AddInfoButton";
+            this.AddInfoButton.Size = new System.Drawing.Size(84, 23);
+            this.AddInfoButton.TabIndex = 11;
+            this.AddInfoButton.Text = "Add Info";
+            this.AddInfoButton.UseVisualStyleBackColor = false;
+            // 
+            // RemoveInfoButton
+            // 
+            this.RemoveInfoButton.Location = new System.Drawing.Point(256, 216);
+            this.RemoveInfoButton.Name = "RemoveInfoButton";
+            this.RemoveInfoButton.Size = new System.Drawing.Size(84, 23);
+            this.RemoveInfoButton.TabIndex = 12;
+            this.RemoveInfoButton.Text = "Remove Info";
+            this.RemoveInfoButton.UseVisualStyleBackColor = true;
+            // 
+            // InteralClock
+            // 
+            this.InteralClock.Interval = 50;
+            this.InteralClock.Tick += new System.EventHandler(this.InteralClock_Tick);
+            // 
+            // InternalClockValue
+            // 
+            this.InternalClockValue.AutoSize = true;
+            this.InternalClockValue.Location = new System.Drawing.Point(339, 261);
+            this.InternalClockValue.Name = "InternalClockValue";
+            this.InternalClockValue.Size = new System.Drawing.Size(13, 15);
+            this.InternalClockValue.TabIndex = 13;
+            this.InternalClockValue.Text = "0";
+            this.InternalClockValue.Visible = false;
+            // 
+            // textCopiedLabel
+            // 
+            this.textCopiedLabel.AutoSize = true;
+            this.textCopiedLabel.BackColor = System.Drawing.Color.LightGray;
+            this.textCopiedLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.textCopiedLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textCopiedLabel.Location = new System.Drawing.Point(256, 242);
+            this.textCopiedLabel.Name = "textCopiedLabel";
+            this.textCopiedLabel.Size = new System.Drawing.Size(90, 22);
+            this.textCopiedLabel.TabIndex = 14;
+            this.textCopiedLabel.Text = "Text Copied";
+            this.textCopiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.textCopiedLabel.Visible = false;
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(352, 298);
+            this.Controls.Add(this.textCopiedLabel);
+            this.Controls.Add(this.InternalClockValue);
+            this.Controls.Add(this.RemoveInfoButton);
+            this.Controls.Add(this.AddInfoButton);
             this.Controls.Add(this.passwordLabel);
             this.Controls.Add(this.usernameLabel);
             this.Controls.Add(this.lastUsedLabel);
@@ -198,5 +262,10 @@
         private Label lastUsedLabel;
         private Label usernameLabel;
         private Label passwordLabel;
+        private Button AddInfoButton;
+        private Button RemoveInfoButton;
+        public System.Windows.Forms.Timer InteralClock;
+        private Label InternalClockValue;
+        private Label textCopiedLabel;
     }
 }
