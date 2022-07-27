@@ -11,26 +11,38 @@ namespace Local_Password_Manager
             InitializeComponent();
         }
 
-        public void AutoCompleteSuggestionBox_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void clearAuto(int x)
         {
 
-        }
 
-        private void clearAuto()
-        {
+            // for proccessing 'different' scenes when gathering data
             ProgressBar.Value = 0;
             ProgressLabel.Text = "0/null";
             AutoCompleteSuggestionBox.Items.Clear();
+            Input1.PlaceholderText = "Input a title";
             creationDateLabel.Visible = false;
             lastUsedLabel.Visible = false;
             commentLabel.Visible = false;
-            usernameLabel.Visible = false;  
+            usernameLabel.Visible = false;
             passwordLabel.Visible = false;
+
+            if (x == 1)
+            {
+                BackButton.Visible = true;
+                AddInfoButton.Visible = false;
+                RemoveInfoButton.Visible = false;
+            }
         }
 
         private void Input1_KeyUp(object sender, KeyEventArgs e)
         {
-            clearAuto();
+
+
+
+            clearAuto(0);
+
+
+            // Gather predicted items for display in the item box
             if (Input1.Text.Length > 0)
             {
                 AutoCompleteSuggestionBox.Visible = true;
@@ -52,6 +64,9 @@ namespace Local_Password_Manager
 
         public List<string> namePrediction(string key)
         {
+
+
+            // Gather results from JSON file and parse through them to find possible matches with current input text
 
             var results = new List<string>();
             using (StreamReader r = new StreamReader("1ab2ba2.json"))
@@ -90,10 +105,16 @@ namespace Local_Password_Manager
                 }
 
 
+
+
+                // Order gathered data by its score (how likely it is to be a match)
+
                 var list = valueScores.Values.OrderByDescending(x => x).ToList();
                 var sortedData = valueScores.OrderBy(x => list.IndexOf(x.Value));
                 foreach (KeyValuePair<string, int> value in sortedData)
                 {
+
+                    // return ordered pair
                     results.Add(value.Key.ToString());
 
                 }
@@ -105,61 +126,76 @@ namespace Local_Password_Manager
 
         public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            if (AddInfoButton.Visible == true)
             {
-                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-                creationDateLabel.Visible = true;
-                lastUsedLabel.Visible = true;
-                commentLabel.Visible = true;
-                usernameLabel.Visible = true;
-                passwordLabel.Visible = true;
-                Input1.Text = "";
-                AutoCompleteSuggestionBox.Visible = false;
-
-                using (StreamReader r = new StreamReader("1ab2ba2.json"))
+                // after user has selected Parent, display all children in respective spots
+                try
                 {
-                    JObject names = JObject.Parse(r.ReadToEnd());
-                    List<string> allNames = new List<string>();
-                    foreach (KeyValuePair<string, JToken> title in names)
+                    string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+                    creationDateLabel.Visible = true;
+                    lastUsedLabel.Visible = true;
+                    commentLabel.Visible = true;
+                    usernameLabel.Visible = true;
+                    passwordLabel.Visible = true;
+                    Input1.Text = "";
+                    AutoCompleteSuggestionBox.Visible = false;
+
+                    using (StreamReader r = new StreamReader("1ab2ba2.json"))
                     {
-                        allNames.Add(title.Key.ToString());
-                    }
-
-
-
-                    creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
-                    lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
-                    commentLabel.Text = $@"comments:    {names[selectedKey]["comments"].ToString()}";
-
-                    usernameLabel.Text = $@"Username:   {names[selectedKey]["username"].ToString()}";
-
-                    string pass = "";
-                    for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
-                    {
-                        if (i < names[selectedKey]["password"].ToString().Count() / 10)
+                        JObject names = JObject.Parse(r.ReadToEnd());
+                        List<string> allNames = new List<string>();
+                        foreach (KeyValuePair<string, JToken> title in names)
                         {
-                            pass = pass + names[selectedKey]["password"].ToString()[i];
+                            allNames.Add(title.Key.ToString());
                         }
-                        else
-                        {
-                            pass = pass + "*";
-                        }
-                    }
 
-                    passwordLabel.Text = $@"Password:   {pass}";
+
+
+                        creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
+                        lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
+                        commentLabel.Text = $@"comments:    {names[selectedKey]["comments"].ToString()}";
+                        usernameLabel.Text = $@"Username:   {names[selectedKey]["username"].ToString()}";
+
+
+
+                        // display only 10% of password, 90% is '*' 's
+                        string pass = "";
+                        for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
+                        {
+                            if (i < names[selectedKey]["password"].ToString().Count() / 10)
+                            {
+                                pass = pass + names[selectedKey]["password"].ToString()[i];
+                            }
+                            else
+                            {
+                                pass = pass + "*";
+                            }
+                        }
+
+                        passwordLabel.Text = $@"Password:   {pass}";
+
+                    }
+                }
+                // unsure how to proceed, this is to catch if any user data is missing or corrupted
+                catch
+                {
 
                 }
-            }
-            catch
-            {
 
+            // I DID IT FOR U FUTURE ME, FUCK U. TAKE THIS VALUE [SELECTED KEY] AND PARSE THROUGH KNOWN PARENTS AND REMOVE ANY DIRECT MATCHES
+            } else if (DelParentButton.Visible == true)
+            {
+                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+                Input1.Text = selectedKey;
+                AutoCompleteSuggestionBox.Visible = false;
             }
         }
 
         private void updateLabels(string KEY)
         {
+
+            // internal clock to remove the 'item copied' text after two seconds
             InteralClock.Start();
-            InternalClockValue.Text = "0";
             string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
             using (StreamReader r = new StreamReader("1ab2ba2.json"))
             {
@@ -172,9 +208,18 @@ namespace Local_Password_Manager
                 Clipboard.SetText(names[selectedKey][KEY].ToString());
                 textCopiedLabel.Visible = true;
             }
-            
+
         }
 
+        // paired with the internal clock, handles some of the logic
+        private void InteralClock_Tick(object sender, EventArgs e)
+        {
+            textCopiedLabel.Visible = false;
+            InteralClock.Stop();
+
+        }
+
+        // Copies text to clipboard, unsure how to improve this system. Password will need extra stesp to copy to clipboard as encryption will be applied
         private void creationDateLabel_Click(object sender, EventArgs e)
         {
             updateLabels("creation-date");
@@ -201,15 +246,61 @@ namespace Local_Password_Manager
             updateLabels("password");
         }
 
-        private void InteralClock_Tick(object sender, EventArgs e)
+        // handles scene management. Unsure how to proceed, this system works but is bulky and can most likely be trimmed
+        private void sceneChange(int sceneInt)
         {
-            InternalClockValue.Text = (Int32.Parse(InternalClockValue.Text) + 1).ToString();
-            if (Int32.Parse(InternalClockValue.Text) > 39)
+            switch (sceneInt)
             {
-                textCopiedLabel.Visible = false;
-                InteralClock.Stop();
-                InternalClockValue.Text = "0";
+                case 1:
+                    clearAuto(0);
+
+                    Input1.Visible = true;
+                    AddInfoButton.Visible = true;
+                    RemoveInfoButton.Visible = true;
+
+                    BackButton.Visible = false;
+                    DelParentButton.Visible = false;
+                    break;
+
+                case 2:
+                    clearAuto(1);
+
+
+                    break;
+
+                case 3:
+
+                    clearAuto(1);
+                    DelParentButton.Visible = true;
+                    break;
+
             }
+        }
+
+
+
+        // proccesses what button has been pressed and sends to a scene manager respectively
+        private void button1_Click(object sender, EventArgs e)
+        {
+            sceneChange(1);
+        }
+
+        private void AddInfoButton_Click(object sender, EventArgs e)
+        {
+            sceneChange(2);
+        }
+
+
+
+        // handels all removal scene info
+        private void RemoveInfoButton_Click(object sender, EventArgs e)
+        {
+            sceneChange(3);
+        }
+
+        private void DelParentButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

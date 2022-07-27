@@ -43,8 +43,9 @@
             this.AddInfoButton = new System.Windows.Forms.Button();
             this.RemoveInfoButton = new System.Windows.Forms.Button();
             this.InteralClock = new System.Windows.Forms.Timer(this.components);
-            this.InternalClockValue = new System.Windows.Forms.Label();
             this.textCopiedLabel = new System.Windows.Forms.Label();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.DelParentButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -104,7 +105,6 @@
             this.AutoCompleteSuggestionBox.TabIndex = 2;
             this.AutoCompleteSuggestionBox.Tag = "InputType";
             this.AutoCompleteSuggestionBox.Visible = false;
-            this.AutoCompleteSuggestionBox.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.AutoCompleteSuggestionBox_ItemCheck);
             this.AutoCompleteSuggestionBox.SelectedIndexChanged += new System.EventHandler(this.AutoCompleteSuggestionBox_SelectedIndexChanged);
             // 
             // creationDateLabel
@@ -182,6 +182,7 @@
             this.AddInfoButton.TabIndex = 11;
             this.AddInfoButton.Text = "Add Info";
             this.AddInfoButton.UseVisualStyleBackColor = false;
+            this.AddInfoButton.Click += new System.EventHandler(this.AddInfoButton_Click);
             // 
             // RemoveInfoButton
             // 
@@ -191,21 +192,12 @@
             this.RemoveInfoButton.TabIndex = 12;
             this.RemoveInfoButton.Text = "Remove Info";
             this.RemoveInfoButton.UseVisualStyleBackColor = true;
+            this.RemoveInfoButton.Click += new System.EventHandler(this.RemoveInfoButton_Click);
             // 
             // InteralClock
             // 
-            this.InteralClock.Interval = 50;
+            this.InteralClock.Interval = 2000;
             this.InteralClock.Tick += new System.EventHandler(this.InteralClock_Tick);
-            // 
-            // InternalClockValue
-            // 
-            this.InternalClockValue.AutoSize = true;
-            this.InternalClockValue.Location = new System.Drawing.Point(339, 261);
-            this.InternalClockValue.Name = "InternalClockValue";
-            this.InternalClockValue.Size = new System.Drawing.Size(13, 15);
-            this.InternalClockValue.TabIndex = 13;
-            this.InternalClockValue.Text = "0";
-            this.InternalClockValue.Visible = false;
             // 
             // textCopiedLabel
             // 
@@ -221,14 +213,41 @@
             this.textCopiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.textCopiedLabel.Visible = false;
             // 
+            // BackButton
+            // 
+            this.BackButton.BackColor = System.Drawing.Color.LightGray;
+            this.BackButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BackButton.Location = new System.Drawing.Point(0, 249);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(60, 23);
+            this.BackButton.TabIndex = 15;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = false;
+            this.BackButton.Visible = false;
+            this.BackButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // DelParentButton
+            // 
+            this.DelParentButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.DelParentButton.DialogResult = System.Windows.Forms.DialogResult.Continue;
+            this.DelParentButton.Location = new System.Drawing.Point(99, 249);
+            this.DelParentButton.Name = "DelParentButton";
+            this.DelParentButton.Size = new System.Drawing.Size(169, 23);
+            this.DelParentButton.TabIndex = 17;
+            this.DelParentButton.Text = "Delete Parent";
+            this.DelParentButton.UseVisualStyleBackColor = true;
+            this.DelParentButton.Visible = false;
+            this.DelParentButton.Click += new System.EventHandler(this.DelParentButton_Click);
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(352, 298);
+            this.Controls.Add(this.DelParentButton);
+            this.Controls.Add(this.BackButton);
             this.Controls.Add(this.textCopiedLabel);
-            this.Controls.Add(this.InternalClockValue);
             this.Controls.Add(this.RemoveInfoButton);
             this.Controls.Add(this.AddInfoButton);
             this.Controls.Add(this.passwordLabel);
@@ -265,7 +284,8 @@
         private Button AddInfoButton;
         private Button RemoveInfoButton;
         public System.Windows.Forms.Timer InteralClock;
-        private Label InternalClockValue;
         private Label textCopiedLabel;
+        private Button BackButton;
+        private Button DelParentButton;
     }
 }
