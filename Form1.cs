@@ -322,14 +322,13 @@ namespace Local_Password_Manager
             {
                 bool title = false;
                 string textData = "", lineKey = "";
-                int start = 0, end = 0, ignore = 0;
+                int end = 0, ignore = 0;
                 foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
                 {
                     try
                     {
-                        start = 6;
-                        end = line.IndexOf('{', start + 1) - 2;
-                        lineKey = line.Substring(start, end - start);
+                        end = line.IndexOf('{', 7) - 2;
+                        lineKey = line.Substring(6, end - 6);
                         title = true;
                     }
                     catch
@@ -341,7 +340,6 @@ namespace Local_Password_Manager
                         if (ignore > 0)
                         {
                             ignore--;
-
                         }
                         else if (lineKey == key && title)
                         {
