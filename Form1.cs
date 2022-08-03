@@ -11,6 +11,19 @@ namespace Local_Password_Manager
             InitializeComponent();
         }
 
+        private void moveCopiedLabel(int x, int y, string text)
+        {
+            System.Drawing.Point point = new System.Drawing.Point(x, y);
+            textCopiedLabel.Location = point;
+            textCopiedLabel.Visible = true;
+            textCopiedLabel.Text = text;
+            if (InteralClock.Enabled == true)
+            {
+                InteralClock.Stop();
+            }
+            InteralClock.Start();
+        }
+
         private void clearAuto(int x)
         {
 
@@ -24,6 +37,7 @@ namespace Local_Password_Manager
             commentLabel.Visible = false;
             usernameLabel.Visible = false;
             passwordLabel.Visible = false;
+            textCopiedLabel.Visible = false;
 
             if (x == 1)
             {
@@ -211,9 +225,7 @@ namespace Local_Password_Manager
                     allNames.Add(title.Key.ToString());
                 }
                 Clipboard.SetText(names[selectedKey][KEY].ToString());
-                System.Drawing.Point point = new System.Drawing.Point(256, 242);
-                textCopiedLabel.Location = point;
-                textCopiedLabel.Visible = true;
+                moveCopiedLabel(256, 242, "Text Copied");
             }
 
         }
@@ -267,11 +279,22 @@ namespace Local_Password_Manager
 
                     BackButton.Visible = false;
                     DelParentButton.Visible = false;
+
+                    InputParent.Visible = false;
+                    InputUsername.Visible = false;
+                    InputPassword.Visible = false;
+                    InputComment.Visible = false;
+                    addItemButton.Visible = false;
                     break;
 
                 case 2:
                     clearAuto(1);
-
+                    InputParent.Visible = true;
+                    InputUsername.Visible = true;
+                    InputPassword.Visible = true;
+                    InputComment.Visible = true;
+                    addItemButton.Visible = true;
+                    Input1.Visible = false;
 
                     break;
 
@@ -313,10 +336,7 @@ namespace Local_Password_Manager
             string key = Input1.Text;
             if (key.Length < 1)
             {
-                System.Drawing.Point point = new System.Drawing.Point(121, 224);
-                textCopiedLabel.Location = point;
-                textCopiedLabel.Visible = true;
-                textCopiedLabel.Text = "No Item Selected";
+                moveCopiedLabel(121, 224, "No Item Selected");
             }
             else
             {
@@ -353,14 +373,60 @@ namespace Local_Password_Manager
                 }
 
                 File.WriteAllText(@"1ab2ba2.json", textData);
-                System.Drawing.Point point = new System.Drawing.Point(139, 224);
-                textCopiedLabel.Location = point;
-                textCopiedLabel.Visible = true;
-                textCopiedLabel.Text = "Deleted Item";
-                InteralClock.Start();
+                moveCopiedLabel(139, 224, "Deleted Item");
             }
         }
 
+        private void addItemButton_Click(object sender, EventArgs e)
+        {
+            bool passed = true;
+            List<string> texts = new List<string>();
+            string newData = "";
+            texts.Add(InputParent.Text);
+            texts.Add(InputUsername.Text);
+            texts.Add(InputPassword.Text);
+            foreach (string text in texts)
+            {
+                if (text.Length < 1)
+                {
+                    moveCopiedLabel(76, 224, "Ensure all required info is filled");
+                    passed = false;
+                }                
+            }
 
+            if (passed)
+            {
+
+                List<string> data = new List<string>();
+                string comments = " ";
+                data.Add("    ,\"" + InputParent.Text + "\":{");
+                data.Add("        \"username\":\"" + InputUsername.Text + "\",");
+                data.Add("        \"password\":\"" + InputPassword.Text + "\",");
+                data.Add("        \"creation-date\":\"" + DateTime.Now.Date.ToString() + "\",");
+                data.Add("        \"last-used-date\":\"" + DateTime.Now.Date.ToString() + "\",");
+                if (InputComment.Text.Length > 0)
+                {
+                    comments = InputComment.Text;
+                }
+                data.Add("        \"comments\":\"" + comments + "\"}");
+                data.Add("}");
+
+
+                label1.Text = newData;
+                foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
+                {
+                    if (line.Trim() != "}")
+                    {
+                        newData = newData + System.Environment.NewLine + line;
+                    }
+                }
+
+                foreach (string dataline in data)
+                {
+                    newData = newData + System.Environment.NewLine + dataline;
+                }
+                File.WriteAllText(@"1ab2ba2.json", newData);
+            }
+        }
     }
 }

@@ -47,6 +47,11 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.DelParentButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.InputParent = new System.Windows.Forms.TextBox();
+            this.InputUsername = new System.Windows.Forms.TextBox();
+            this.InputPassword = new System.Windows.Forms.TextBox();
+            this.InputComment = new System.Windows.Forms.TextBox();
+            this.addItemButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -206,11 +211,11 @@
             this.textCopiedLabel.BackColor = System.Drawing.Color.LightGray;
             this.textCopiedLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textCopiedLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textCopiedLabel.Location = new System.Drawing.Point(139, 224);
+            this.textCopiedLabel.Location = new System.Drawing.Point(76, 224);
             this.textCopiedLabel.Name = "textCopiedLabel";
-            this.textCopiedLabel.Size = new System.Drawing.Size(90, 22);
+            this.textCopiedLabel.Size = new System.Drawing.Size(216, 22);
             this.textCopiedLabel.TabIndex = 14;
-            this.textCopiedLabel.Text = "Text Copied";
+            this.textCopiedLabel.Text = "Ensure all required info is filled";
             this.textCopiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.textCopiedLabel.Visible = false;
             // 
@@ -243,11 +248,92 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 74);
+            this.label1.Location = new System.Drawing.Point(278, 169);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 15);
             this.label1.TabIndex = 18;
             this.label1.Text = "label1";
+            // 
+            // InputParent
+            // 
+            this.InputParent.BackColor = System.Drawing.Color.LightGray;
+            this.InputParent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputParent.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.InputParent.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InputParent.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.InputParent.Location = new System.Drawing.Point(99, 63);
+            this.InputParent.MaxLength = 45;
+            this.InputParent.Name = "InputParent";
+            this.InputParent.PlaceholderText = "Input a Parent Title";
+            this.InputParent.Size = new System.Drawing.Size(159, 26);
+            this.InputParent.TabIndex = 19;
+            this.InputParent.Tag = "InputType";
+            this.InputParent.Visible = false;
+            this.InputParent.WordWrap = false;
+            // 
+            // InputUsername
+            // 
+            this.InputUsername.BackColor = System.Drawing.Color.LightGray;
+            this.InputUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.InputUsername.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InputUsername.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.InputUsername.Location = new System.Drawing.Point(99, 95);
+            this.InputUsername.MaxLength = 45;
+            this.InputUsername.Name = "InputUsername";
+            this.InputUsername.PlaceholderText = "Input Username";
+            this.InputUsername.Size = new System.Drawing.Size(159, 26);
+            this.InputUsername.TabIndex = 20;
+            this.InputUsername.Tag = "InputType";
+            this.InputUsername.Visible = false;
+            this.InputUsername.WordWrap = false;
+            // 
+            // InputPassword
+            // 
+            this.InputPassword.BackColor = System.Drawing.Color.LightGray;
+            this.InputPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.InputPassword.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InputPassword.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.InputPassword.Location = new System.Drawing.Point(99, 127);
+            this.InputPassword.MaxLength = 45;
+            this.InputPassword.Name = "InputPassword";
+            this.InputPassword.PlaceholderText = "Input Password";
+            this.InputPassword.Size = new System.Drawing.Size(159, 26);
+            this.InputPassword.TabIndex = 21;
+            this.InputPassword.Tag = "InputType";
+            this.InputPassword.Visible = false;
+            this.InputPassword.WordWrap = false;
+            // 
+            // InputComment
+            // 
+            this.InputComment.BackColor = System.Drawing.Color.LightGray;
+            this.InputComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputComment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.InputComment.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.InputComment.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.InputComment.Location = new System.Drawing.Point(99, 159);
+            this.InputComment.MaxLength = 45;
+            this.InputComment.Name = "InputComment";
+            this.InputComment.PlaceholderText = "Input Comments*";
+            this.InputComment.Size = new System.Drawing.Size(159, 26);
+            this.InputComment.TabIndex = 22;
+            this.InputComment.Tag = "InputType";
+            this.InputComment.Visible = false;
+            this.InputComment.WordWrap = false;
+            // 
+            // addItemButton
+            // 
+            this.addItemButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addItemButton.DialogResult = System.Windows.Forms.DialogResult.Continue;
+            this.addItemButton.Location = new System.Drawing.Point(99, 250);
+            this.addItemButton.Name = "addItemButton";
+            this.addItemButton.Size = new System.Drawing.Size(169, 23);
+            this.addItemButton.TabIndex = 23;
+            this.addItemButton.Text = "Add Item";
+            this.addItemButton.UseVisualStyleBackColor = true;
+            this.addItemButton.Visible = false;
+            this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
             // 
             // Index
             // 
@@ -255,6 +341,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(352, 298);
+            this.Controls.Add(this.addItemButton);
+            this.Controls.Add(this.InputComment);
+            this.Controls.Add(this.InputPassword);
+            this.Controls.Add(this.InputUsername);
+            this.Controls.Add(this.InputParent);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DelParentButton);
             this.Controls.Add(this.BackButton);
@@ -299,5 +390,10 @@
         private Button BackButton;
         private Button DelParentButton;
         private Label label1;
+        private TextBox InputParent;
+        private TextBox InputUsername;
+        private TextBox InputPassword;
+        private TextBox InputComment;
+        private Button addItemButton;
     }
 }
