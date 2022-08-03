@@ -46,6 +46,7 @@
             this.textCopiedLabel = new System.Windows.Forms.Label();
             this.BackButton = new System.Windows.Forms.Button();
             this.DelParentButton = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -205,7 +206,7 @@
             this.textCopiedLabel.BackColor = System.Drawing.Color.LightGray;
             this.textCopiedLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textCopiedLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textCopiedLabel.Location = new System.Drawing.Point(256, 242);
+            this.textCopiedLabel.Location = new System.Drawing.Point(139, 224);
             this.textCopiedLabel.Name = "textCopiedLabel";
             this.textCopiedLabel.Size = new System.Drawing.Size(90, 22);
             this.textCopiedLabel.TabIndex = 14;
@@ -224,7 +225,7 @@
             this.BackButton.Text = "Back";
             this.BackButton.UseVisualStyleBackColor = false;
             this.BackButton.Visible = false;
-            this.BackButton.Click += new System.EventHandler(this.button1_Click);
+            this.BackButton.Click += new System.EventHandler(this.backButtonClick);
             // 
             // DelParentButton
             // 
@@ -239,12 +240,22 @@
             this.DelParentButton.Visible = false;
             this.DelParentButton.Click += new System.EventHandler(this.DelParentButton_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(9, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "label1";
+            // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(352, 298);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.DelParentButton);
             this.Controls.Add(this.BackButton);
             this.Controls.Add(this.textCopiedLabel);
@@ -287,5 +298,6 @@
         private Label textCopiedLabel;
         private Button BackButton;
         private Button DelParentButton;
+        private Label label1;
     }
 }

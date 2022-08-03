@@ -19,7 +19,6 @@ namespace Local_Password_Manager
             ProgressBar.Value = 0;
             ProgressLabel.Text = "0/null";
             AutoCompleteSuggestionBox.Items.Clear();
-            Input1.PlaceholderText = "Input a title";
             creationDateLabel.Visible = false;
             lastUsedLabel.Visible = false;
             commentLabel.Visible = false;
@@ -31,7 +30,9 @@ namespace Local_Password_Manager
                 BackButton.Visible = true;
                 AddInfoButton.Visible = false;
                 RemoveInfoButton.Visible = false;
+                AutoCompleteSuggestionBox.Visible = false;
             }
+
         }
 
         private void Input1_KeyUp(object sender, KeyEventArgs e)
@@ -126,30 +127,30 @@ namespace Local_Password_Manager
 
         public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (AddInfoButton.Visible == true)
+            // after user has selected Parent, display all children in respective spots
+            try
             {
-                // after user has selected Parent, display all children in respective spots
-                try
+                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+
+
+                using (StreamReader r = new StreamReader("1ab2ba2.json"))
                 {
-                    string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-                    creationDateLabel.Visible = true;
-                    lastUsedLabel.Visible = true;
-                    commentLabel.Visible = true;
-                    usernameLabel.Visible = true;
-                    passwordLabel.Visible = true;
-                    Input1.Text = "";
-                    AutoCompleteSuggestionBox.Visible = false;
-
-                    using (StreamReader r = new StreamReader("1ab2ba2.json"))
+                    JObject names = JObject.Parse(r.ReadToEnd());
+                    List<string> allNames = new List<string>();
+                    foreach (KeyValuePair<string, JToken> title in names)
                     {
-                        JObject names = JObject.Parse(r.ReadToEnd());
-                        List<string> allNames = new List<string>();
-                        foreach (KeyValuePair<string, JToken> title in names)
-                        {
-                            allNames.Add(title.Key.ToString());
-                        }
+                        allNames.Add(title.Key.ToString());
+                    }
 
-
+                    if (AddInfoButton.Visible)
+                    {
+                        creationDateLabel.Visible = true;
+                        lastUsedLabel.Visible = true;
+                        commentLabel.Visible = true;
+                        usernameLabel.Visible = true;
+                        passwordLabel.Visible = true;
+                        Input1.Text = "";
+                        AutoCompleteSuggestionBox.Visible = false;
 
                         creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"].ToString()}";
                         lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"].ToString()}";
@@ -174,22 +175,26 @@ namespace Local_Password_Manager
 
                         passwordLabel.Text = $@"Password:   {pass}";
 
+                    } 
+                    else if (DelParentButton.Visible)
+                    {
+                        Input1.Text = selectedKey;
+                        AutoCompleteSuggestionBox.Visible = false;
                     }
                 }
-                // unsure how to proceed, this is to catch if any user data is missing or corrupted
-                catch
-                {
+            }
+            // unsure how to proceed, this is to catch if any user data is missing or corrupted
+            catch
+            {
 
-                }
+            }
 
             // I DID IT FOR U FUTURE ME, FUCK U. TAKE THIS VALUE [SELECTED KEY] AND PARSE THROUGH KNOWN PARENTS AND REMOVE ANY DIRECT MATCHES
-            } else if (DelParentButton.Visible == true)
-            {
-                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-                Input1.Text = selectedKey;
-                AutoCompleteSuggestionBox.Visible = false;
-            }
+
         }
+
+
+
 
         private void updateLabels(string KEY)
         {
@@ -206,6 +211,8 @@ namespace Local_Password_Manager
                     allNames.Add(title.Key.ToString());
                 }
                 Clipboard.SetText(names[selectedKey][KEY].ToString());
+                System.Drawing.Point point = new System.Drawing.Point(256, 242);
+                textCopiedLabel.Location = point;
                 textCopiedLabel.Visible = true;
             }
 
@@ -280,11 +287,11 @@ namespace Local_Password_Manager
 
 
         // proccesses what button has been pressed and sends to a scene manager respectively
-        private void button1_Click(object sender, EventArgs e)
+        private void backButtonClick(object sender, EventArgs e)
         {
+            Input1.Text = "";
             sceneChange(1);
         }
-
         private void AddInfoButton_Click(object sender, EventArgs e)
         {
             sceneChange(2);
@@ -298,9 +305,64 @@ namespace Local_Password_Manager
             sceneChange(3);
         }
 
+
+
+        // will delete currently selected parent from the directory
         private void DelParentButton_Click(object sender, EventArgs e)
         {
+            string key = Input1.Text;
+            if (key.Length < 1)
+            {
+                System.Drawing.Point point = new System.Drawing.Point(121, 224);
+                textCopiedLabel.Location = point;
+                textCopiedLabel.Visible = true;
+                textCopiedLabel.Text = "No Item Selected";
+            }
+            else
+            {
+                bool title = false;
+                string textData = "", lineKey = "";
+                int start = 0, end = 0, ignore = 0;
+                foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
+                {
+                    try
+                    {
+                        start = 6;
+                        end = line.IndexOf('{', start + 1) - 2;
+                        lineKey = line.Substring(start, end - start);
+                        title = true;
+                    }
+                    catch
+                    {
+                        title = false;
+                    }
+                    finally
+                    {
+                        if (ignore > 0)
+                        {
+                            ignore--;
 
+                        }
+                        else if (lineKey == key && title)
+                        {
+                            ignore = 5;
+                        }
+                        else
+                        {
+                            textData = textData + System.Environment.NewLine + line;
+                        }
+                    }
+                }
+
+                File.WriteAllText(@"1ab2ba2.json", textData);
+                System.Drawing.Point point = new System.Drawing.Point(139, 224);
+                textCopiedLabel.Location = point;
+                textCopiedLabel.Visible = true;
+                textCopiedLabel.Text = "Deleted Item";
+                InteralClock.Start();
+            }
         }
+
+
     }
 }
