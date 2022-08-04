@@ -31,6 +31,10 @@ namespace Local_Password_Manager
             // for proccessing 'different' scenes when gathering data
             ProgressBar.Value = 0;
             ProgressLabel.Text = "0/null";
+            InputParent.Text = "";
+            InputUsername.Text = "";
+            InputPassword.Text = "";
+            InputComment.Text = "";
             AutoCompleteSuggestionBox.Items.Clear();
             creationDateLabel.Visible = false;
             lastUsedLabel.Visible = false;
@@ -367,7 +371,14 @@ namespace Local_Password_Manager
                         }
                         else
                         {
-                            textData = textData + System.Environment.NewLine + line;
+                            if (line.Trim() == "{")
+                            {
+                                textData = line;
+                            }
+                            else
+                            {
+                                textData = textData + System.Environment.NewLine + line;
+                            }
                         }
                     }
                 }
@@ -415,17 +426,37 @@ namespace Local_Password_Manager
                 label1.Text = newData;
                 foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
                 {
-                    if (line.Trim() != "}")
+                    if (line.Trim() == "{")
+                    {
+                        newData = line;
+                    }
+                    else if (line.Trim() != "}")
                     {
                         newData = newData + System.Environment.NewLine + line;
                     }
                 }
-
                 foreach (string dataline in data)
                 {
                     newData = newData + System.Environment.NewLine + dataline;
                 }
+
+                using (StreamReader r = new StreamReader("1ab2ba2.json"))
+                {
+                    JObject names = JObject.Parse(r.ReadToEnd());
+                    foreach (KeyValuePair<string, JToken> title in names)
+                    {
+                        if (title.Key.ToString() == InputParent.Text)
+                        {
+                            moveCopiedLabel(114, 224, "Parent Name In Use");
+                            return;
+                        }
+                    }
+                }
+
                 File.WriteAllText(@"1ab2ba2.json", newData);
+
+
+                sceneChange(1);
             }
         }
     }

@@ -211,11 +211,11 @@
             this.textCopiedLabel.BackColor = System.Drawing.Color.LightGray;
             this.textCopiedLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textCopiedLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textCopiedLabel.Location = new System.Drawing.Point(76, 224);
+            this.textCopiedLabel.Location = new System.Drawing.Point(114, 225);
             this.textCopiedLabel.Name = "textCopiedLabel";
-            this.textCopiedLabel.Size = new System.Drawing.Size(216, 22);
+            this.textCopiedLabel.Size = new System.Drawing.Size(140, 22);
             this.textCopiedLabel.TabIndex = 14;
-            this.textCopiedLabel.Text = "Ensure all required info is filled";
+            this.textCopiedLabel.Text = "Parent Name In Use";
             this.textCopiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.textCopiedLabel.Visible = false;
             // 
