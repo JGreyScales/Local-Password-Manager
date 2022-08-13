@@ -6,3 +6,30 @@
         "last-used-date":"key",
         "Comments":"comments"}
 }
+
+{
+    "▬":{
+        "username":"placeholder",
+        "password":"placeholder",
+        "creation-date":"2022-07-20",
+        "last-used-date":"2022-07-20",
+        "comments":"placeholder"}
+    ,"AMAZON.CA":{
+        "username":"GAMEBRICKGAMER@GMAIL.COM",
+        "password":"Dexter777",
+        "creation-date":"2022-08-12 12:00:00 AM",
+        "last-used-date":"2022-08-12 12:00:00 AM",
+        "comments":"AMAZON ACCOUNT "}
+    ,"MY.CONTABO.COM":{
+        "username":"greyscales676@gmail.com",
+        "password":"QF4dAL7aW2Pj",
+        "creation-date":"2022-08-12 12:00:00 AM",
+        "last-used-date":"2022-08-12 12:00:00 AM",
+        "comments":"VPS SERVER"}
+    ,"GAMESERVERS.CYREXAG.COM":{
+        "username":"greyscales@stupid.com",
+        "password":"greystupid",
+        "creation-date":"2022-08-12 12:00:00 AM",
+        "last-used-date":"2022-08-12 12:00:00 AM",
+        "comments":"MY LOGIN FOR ANDREW'S GAME SERVER"}
+}

@@ -42,7 +42,6 @@ namespace Local_Password_Manager
             InputPassword.PlaceholderText = "Input Password";
             InputComment.PlaceholderText = "Input Comments*";
 
-            AutoCompleteSuggestionBox.Items.Clear();
             creationDateLabel.Visible = false;
             lastUsedLabel.Visible = false;
             commentLabel.Visible = false;
@@ -57,7 +56,10 @@ namespace Local_Password_Manager
                 RemoveInfoButton.Visible = false;
                 AutoCompleteSuggestionBox.Visible = false;
                 EditInfoButton.Visible = false;
+                return;
             }
+            AutoCompleteSuggestionBox.Items.Clear();
+
 
         }
 
@@ -153,67 +155,72 @@ namespace Local_Password_Manager
 
         public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // after user has selected Parent, display all children in respective spots
-            string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
-
-
-            using (StreamReader r = new StreamReader("1ab2ba2.json"))
+            try
             {
-                JObject names = JObject.Parse(r.ReadToEnd());
-                List<string> allNames = new List<string>();
-                foreach (KeyValuePair<string, JToken> title in names)
+                // after user has selected Parent, display all children in respective spots
+                string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
+
+
+                using (StreamReader r = new StreamReader("1ab2ba2.json"))
                 {
-                    allNames.Add(title.Key.ToString());
-                }
-
-                if (AddInfoButton.Visible)
-                {
-                    EditInfoButton.Visible = true;
-                    creationDateLabel.Visible = true;
-                    lastUsedLabel.Visible = true;
-                    commentLabel.Visible = true;
-                    usernameLabel.Visible = true;
-                    passwordLabel.Visible = true;
-                    Input1.Text = "";
-                    AutoCompleteSuggestionBox.Visible = false;
-
-                    creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"]}";
-                    lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"]}";
-                    commentLabel.Text = $@"comments:    {names[selectedKey]["comments"]}";
-                    usernameLabel.Text = $@"Username:   {names[selectedKey]["username"]}";
-
-
-
-                    // display only 10% of password, 90% is '*' 's
-                    string pass = "";
-                    for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
+                    JObject names = JObject.Parse(r.ReadToEnd());
+                    List<string> allNames = new List<string>();
+                    foreach (KeyValuePair<string, JToken> title in names)
                     {
-                        if (i < names[selectedKey]["password"].ToString().Count() * .1)
-                        {
-                            pass = pass + names[selectedKey]["password"].ToString()[i];
-                        }
-                        else
-                        {
-                            pass = pass + "*";
-                        }
+                        allNames.Add(title.Key.ToString());
                     }
 
-                    passwordLabel.Text = $@"Password:   {pass}";
+                    if (AddInfoButton.Visible)
+                    {
+                        EditInfoButton.Visible = true;
+                        creationDateLabel.Visible = true;
+                        lastUsedLabel.Visible = true;
+                        commentLabel.Visible = true;
+                        usernameLabel.Visible = true;
+                        passwordLabel.Visible = true;
+                        Input1.Text = "";
+                        AutoCompleteSuggestionBox.Visible = false;
 
-                }
-                else if (DelParentButton.Visible)
-                {
-                    Input1.Text = selectedKey;
-                    AutoCompleteSuggestionBox.Visible = false;
-                }
-                else
-                {
-                    EditInfoButton.Visible = false;
+                        creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"]}";
+                        lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"]}";
+                        commentLabel.Text = $@"comments:    {names[selectedKey]["comments"]}";
+                        usernameLabel.Text = $@"Username:   {names[selectedKey]["username"]}";
+
+
+
+                        // display only 10% of password, 90% is '*' 's
+                        string pass = "";
+                        for (int i = 0; i < names[selectedKey]["password"].ToString().Count(); i++)
+                        {
+                            if (i < names[selectedKey]["password"].ToString().Count() * .1)
+                            {
+                                pass = pass + names[selectedKey]["password"].ToString()[i];
+                            }
+                            else
+                            {
+                                pass = pass + "*";
+                            }
+                        }
+
+                        passwordLabel.Text = $@"Password:   {pass}";
+
+                    }
+                    else if (DelParentButton.Visible)
+                    {
+                        Input1.Text = selectedKey;
+                        AutoCompleteSuggestionBox.Visible = false;
+                    }
+                    else
+                    {
+                        EditInfoButton.Visible = false;
+                    }
                 }
             }
-            
+            catch
+            {
 
-            // I DID IT FOR U FUTURE ME, FUCK U. TAKE THIS VALUE [SELECTED KEY] AND PARSE THROUGH KNOWN PARENTS AND REMOVE ANY DIRECT MATCHES
+            }
+
 
         }
 
@@ -408,7 +415,7 @@ namespace Local_Password_Manager
                 {
                     moveCopiedLabel(76, 224, "Ensure all required info is filled");
                     passed = false;
-                }                
+                }
             }
 
             if (passed)
@@ -429,7 +436,7 @@ namespace Local_Password_Manager
                 data.Add("}");
 
 
-                
+
                 foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
                 {
                     if (line.Trim() == "{")
@@ -468,7 +475,7 @@ namespace Local_Password_Manager
 
         private void Edit_Button_clicked(object sender, EventArgs e)
         {
-                // this works as an if statement since if no item is selected it throws a nullreference exepction which is caught in the catch
+            // this works as an if statement since if no item is selected it throws a nullreference exepction which is caught in the catch
             string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
 
             sceneChange(2);
@@ -503,7 +510,59 @@ namespace Local_Password_Manager
 
         private void ApplyInfoButton_Click(object sender, EventArgs e)
         {
+            string newData = "";
+            using (StreamReader r = new StreamReader("1ab2ba2.json"))
+            {
+                JObject names = JObject.Parse(r.ReadToEnd());
+                string key = AutoCompleteSuggestionBox.SelectedItem.ToString();
 
+
+                List<TextBox> textBoxes = new List<TextBox>();
+                textBoxes.Add(InputParent);
+                textBoxes.Add(InputUsername);
+                textBoxes.Add(InputComment);
+
+                string newline = System.Environment.NewLine;
+
+
+
+                foreach (TextBox box in textBoxes)
+                {
+                    if (box.Text.Length < 1)
+                    {
+                        box.Text = box.PlaceholderText;
+                    }
+                }
+                if (InputPassword.Text.Length < 1)
+                {
+                    InputPassword.Text = names[key]["password"].ToString();
+                }
+
+                int count = 0;
+                foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
+                {
+                    if (count > 0)
+                    {
+                        count--;
+                    }
+                    else if (line == "    ,\"" + AutoCompleteSuggestionBox.SelectedItem.ToString() + "\":{")
+                    {
+                        count = 5;
+
+                        newData = newData + "    ,\"" + InputParent.Text + "\":{" + newline;
+                        newData = newData + "        \"username\":\"" + InputUsername.Text + "\"," + newline;
+                        newData = newData + "        \"password\":\"" + InputPassword.Text + "\"," + newline;
+                        newData = newData + "        \"creation-date\":\"" + names[key]["creation-date"] + "\"," + newline + "        \"last-used-date\":\"" + names[key]["last-used-date"] + "\"," + newline;
+                        newData = newData + "        \"comments\":\"" + InputComment.Text + "\"}" + newline;
+
+                }
+                    else
+                    {
+                        newData = newData + line + System.Environment.NewLine;
+                    }
+                }
+            }
+            File.WriteAllText(@"1ab2ba2.json", newData);
         }
     }
 }
