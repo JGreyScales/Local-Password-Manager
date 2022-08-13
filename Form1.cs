@@ -66,8 +66,6 @@ namespace Local_Password_Manager
         private void Input1_KeyUp(object sender, KeyEventArgs e)
         {
 
-
-
             clearAuto(0);
 
 
@@ -98,6 +96,8 @@ namespace Local_Password_Manager
             // Gather results from JSON file and parse through them to find possible matches with current input text
 
             var results = new List<string>();
+
+
             using (StreamReader r = new StreamReader("1ab2ba2.json"))
             {
                 JObject names = JObject.Parse(r.ReadToEnd());
@@ -151,8 +151,8 @@ namespace Local_Password_Manager
 
 
             return results;
-        }
 
+        }
         public void AutoCompleteSuggestionBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -183,7 +183,7 @@ namespace Local_Password_Manager
 
                         creationDateLabel.Text = $@"Creation Date:  {names[selectedKey]["creation-date"]}";
                         lastUsedLabel.Text = $@"Last Used Date:  {names[selectedKey]["last-used-date"]}";
-                        commentLabel.Text = $@"comments:    {names[selectedKey]["comments"]}";
+                        commentLabel.Text = $@"comments: {names[selectedKey]["comments"]}";
                         usernameLabel.Text = $@"Username:   {names[selectedKey]["username"]}";
 
 
@@ -229,21 +229,39 @@ namespace Local_Password_Manager
 
         private void updateLabels(string KEY)
         {
-
+            string newData = "";
             // internal clock to remove the 'item copied' text after two seconds
             InteralClock.Start();
             string selectedKey = AutoCompleteSuggestionBox.SelectedItem.ToString();
             using (StreamReader r = new StreamReader("1ab2ba2.json"))
             {
                 JObject names = JObject.Parse(r.ReadToEnd());
-                List<string> allNames = new List<string>();
-                foreach (KeyValuePair<string, JToken> title in names)
-                {
-                    allNames.Add(title.Key.ToString());
-                }
+
                 Clipboard.SetText(names[selectedKey][KEY].ToString());
-                moveCopiedLabel(256, 242, "Text Copied");
+
+                int count = 0;
+                foreach (string line in System.IO.File.ReadLines(@"1ab2ba2.json"))
+                {
+                    if (count > 0)
+                    {
+                        count--;
+                        if (count == 1)
+                        {
+                            newData = newData + "        \"last-used-date\":\"" + DateTime.Now.Date.ToString() + "\",\r\n";
+                            continue;
+                        }
+                    }
+                    else if (line.Contains(selectedKey))
+                    {
+                        count = 5;
+                    }
+                    newData = newData + line + System.Environment.NewLine;
+                }
             }
+
+            File.WriteAllText(@"1ab2ba2.json", newData);
+            moveCopiedLabel(114, 136, "Text Copied");
+            lastUsedLabel.Text = "Last Used Date:  " + DateTime.Now.Date.ToString();
 
         }
 

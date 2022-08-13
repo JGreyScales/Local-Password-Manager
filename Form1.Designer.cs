@@ -53,6 +53,7 @@
             this.addItemButton = new System.Windows.Forms.Button();
             this.EditInfoButton = new System.Windows.Forms.Button();
             this.ApplyInfoButton = new System.Windows.Forms.Button();
+            this.a = new System.Windows.Forms.Label();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -248,11 +249,17 @@
             this.ApplyInfoButton.UseVisualStyleBackColor = true;
             this.ApplyInfoButton.Click += new System.EventHandler(this.ApplyInfoButton_Click);
             // 
+            // a
+            // 
+            resources.ApplyResources(this.a, "a");
+            this.a.Name = "a";
+            // 
             // Index
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.Controls.Add(this.a);
             this.Controls.Add(this.ApplyInfoButton);
             this.Controls.Add(this.EditInfoButton);
             this.Controls.Add(this.addItemButton);
@@ -305,5 +312,6 @@
         private Button addItemButton;
         private Button EditInfoButton;
         private Button ApplyInfoButton;
+        private Label a;
     }
 }
