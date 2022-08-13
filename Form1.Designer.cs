@@ -43,160 +43,114 @@
             this.AddInfoButton = new System.Windows.Forms.Button();
             this.RemoveInfoButton = new System.Windows.Forms.Button();
             this.InteralClock = new System.Windows.Forms.Timer(this.components);
-            this.textCopiedLabel = new System.Windows.Forms.Label();
+            this.ErrorLabel = new System.Windows.Forms.Label();
             this.BackButton = new System.Windows.Forms.Button();
             this.DelParentButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.InputParent = new System.Windows.Forms.TextBox();
             this.InputUsername = new System.Windows.Forms.TextBox();
             this.InputPassword = new System.Windows.Forms.TextBox();
             this.InputComment = new System.Windows.Forms.TextBox();
             this.addItemButton = new System.Windows.Forms.Button();
+            this.EditInfoButton = new System.Windows.Forms.Button();
+            this.ApplyInfoButton = new System.Windows.Forms.Button();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
             // 
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.ProgressBar,
             this.ProgressLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 276);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(352, 22);
-            this.statusStrip1.TabIndex = 2;
-            this.statusStrip1.Text = "statusStrip1";
             // 
             // ProgressBar
             // 
+            resources.ApplyResources(this.ProgressBar, "ProgressBar");
             this.ProgressBar.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ProgressBar.Size = new System.Drawing.Size(100, 16);
             // 
             // ProgressLabel
             // 
+            resources.ApplyResources(this.ProgressLabel, "ProgressLabel");
             this.ProgressLabel.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ProgressLabel.Name = "ProgressLabel";
-            this.ProgressLabel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.ProgressLabel.Size = new System.Drawing.Size(38, 17);
-            this.ProgressLabel.Text = "0/null";
             // 
             // Input1
             // 
+            resources.ApplyResources(this.Input1, "Input1");
             this.Input1.BackColor = System.Drawing.Color.LightGray;
             this.Input1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Input1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.Input1.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Input1.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.Input1.Location = new System.Drawing.Point(12, 12);
-            this.Input1.MaxLength = 45;
             this.Input1.Name = "Input1";
-            this.Input1.PlaceholderText = "Input a title";
-            this.Input1.Size = new System.Drawing.Size(328, 26);
-            this.Input1.TabIndex = 4;
             this.Input1.Tag = "InputType";
-            this.Input1.WordWrap = false;
             this.Input1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Input1_KeyUp);
             // 
             // AutoCompleteSuggestionBox
             // 
+            resources.ApplyResources(this.AutoCompleteSuggestionBox, "AutoCompleteSuggestionBox");
             this.AutoCompleteSuggestionBox.BackColor = System.Drawing.Color.Gainsboro;
             this.AutoCompleteSuggestionBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.AutoCompleteSuggestionBox.CheckOnClick = true;
             this.AutoCompleteSuggestionBox.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AutoCompleteSuggestionBox.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.AutoCompleteSuggestionBox.Location = new System.Drawing.Point(12, 44);
             this.AutoCompleteSuggestionBox.Name = "AutoCompleteSuggestionBox";
-            this.AutoCompleteSuggestionBox.Size = new System.Drawing.Size(328, 137);
-            this.AutoCompleteSuggestionBox.TabIndex = 2;
             this.AutoCompleteSuggestionBox.Tag = "InputType";
-            this.AutoCompleteSuggestionBox.Visible = false;
             this.AutoCompleteSuggestionBox.SelectedIndexChanged += new System.EventHandler(this.AutoCompleteSuggestionBox_SelectedIndexChanged);
             // 
             // creationDateLabel
             // 
-            this.creationDateLabel.AutoSize = true;
+            resources.ApplyResources(this.creationDateLabel, "creationDateLabel");
             this.creationDateLabel.BackColor = System.Drawing.Color.Gainsboro;
             this.creationDateLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.creationDateLabel.Location = new System.Drawing.Point(12, 184);
             this.creationDateLabel.Name = "creationDateLabel";
-            this.creationDateLabel.Size = new System.Drawing.Size(82, 15);
-            this.creationDateLabel.TabIndex = 6;
-            this.creationDateLabel.Text = "Creation Date:";
-            this.creationDateLabel.Visible = false;
             this.creationDateLabel.Click += new System.EventHandler(this.creationDateLabel_Click);
             // 
             // commentLabel
             // 
-            this.commentLabel.AutoSize = true;
+            resources.ApplyResources(this.commentLabel, "commentLabel");
             this.commentLabel.BackColor = System.Drawing.Color.Gainsboro;
             this.commentLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.commentLabel.Location = new System.Drawing.Point(12, 214);
             this.commentLabel.Name = "commentLabel";
-            this.commentLabel.Size = new System.Drawing.Size(69, 15);
-            this.commentLabel.TabIndex = 7;
-            this.commentLabel.Text = "Comments:";
-            this.commentLabel.Visible = false;
             this.commentLabel.Click += new System.EventHandler(this.commentLabel_Click);
             // 
             // lastUsedLabel
             // 
-            this.lastUsedLabel.AutoSize = true;
+            resources.ApplyResources(this.lastUsedLabel, "lastUsedLabel");
             this.lastUsedLabel.BackColor = System.Drawing.Color.Gainsboro;
             this.lastUsedLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.lastUsedLabel.Location = new System.Drawing.Point(12, 199);
             this.lastUsedLabel.Name = "lastUsedLabel";
-            this.lastUsedLabel.Size = new System.Drawing.Size(60, 15);
-            this.lastUsedLabel.TabIndex = 8;
-            this.lastUsedLabel.Text = "Last Used:";
-            this.lastUsedLabel.Visible = false;
             this.lastUsedLabel.Click += new System.EventHandler(this.lastUsedLabel_Click);
             // 
             // usernameLabel
             // 
-            this.usernameLabel.AutoSize = true;
+            resources.ApplyResources(this.usernameLabel, "usernameLabel");
             this.usernameLabel.BackColor = System.Drawing.Color.Gainsboro;
             this.usernameLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.usernameLabel.Location = new System.Drawing.Point(12, 238);
             this.usernameLabel.Name = "usernameLabel";
-            this.usernameLabel.Size = new System.Drawing.Size(63, 15);
-            this.usernameLabel.TabIndex = 9;
-            this.usernameLabel.Text = "Username:";
-            this.usernameLabel.Visible = false;
             this.usernameLabel.Click += new System.EventHandler(this.usernameLabel_Click);
             // 
             // passwordLabel
             // 
-            this.passwordLabel.AutoSize = true;
+            resources.ApplyResources(this.passwordLabel, "passwordLabel");
             this.passwordLabel.BackColor = System.Drawing.Color.Gainsboro;
             this.passwordLabel.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.passwordLabel.Location = new System.Drawing.Point(12, 253);
             this.passwordLabel.Name = "passwordLabel";
-            this.passwordLabel.Size = new System.Drawing.Size(60, 15);
-            this.passwordLabel.TabIndex = 10;
-            this.passwordLabel.Text = "Password:";
-            this.passwordLabel.Visible = false;
             this.passwordLabel.Click += new System.EventHandler(this.passwordLabel_Click);
             // 
             // AddInfoButton
             // 
+            resources.ApplyResources(this.AddInfoButton, "AddInfoButton");
             this.AddInfoButton.BackColor = System.Drawing.Color.LightGray;
             this.AddInfoButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.AddInfoButton.Location = new System.Drawing.Point(256, 187);
             this.AddInfoButton.Name = "AddInfoButton";
-            this.AddInfoButton.Size = new System.Drawing.Size(84, 23);
-            this.AddInfoButton.TabIndex = 11;
-            this.AddInfoButton.Text = "Add Info";
             this.AddInfoButton.UseVisualStyleBackColor = false;
             this.AddInfoButton.Click += new System.EventHandler(this.AddInfoButton_Click);
             // 
             // RemoveInfoButton
             // 
-            this.RemoveInfoButton.Location = new System.Drawing.Point(256, 216);
+            resources.ApplyResources(this.RemoveInfoButton, "RemoveInfoButton");
             this.RemoveInfoButton.Name = "RemoveInfoButton";
-            this.RemoveInfoButton.Size = new System.Drawing.Size(84, 23);
-            this.RemoveInfoButton.TabIndex = 12;
-            this.RemoveInfoButton.Text = "Remove Info";
             this.RemoveInfoButton.UseVisualStyleBackColor = true;
             this.RemoveInfoButton.Click += new System.EventHandler(this.RemoveInfoButton_Click);
             // 
@@ -205,151 +159,110 @@
             this.InteralClock.Interval = 2000;
             this.InteralClock.Tick += new System.EventHandler(this.InteralClock_Tick);
             // 
-            // textCopiedLabel
+            // ErrorLabel
             // 
-            this.textCopiedLabel.AutoSize = true;
-            this.textCopiedLabel.BackColor = System.Drawing.Color.LightGray;
-            this.textCopiedLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textCopiedLabel.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.textCopiedLabel.Location = new System.Drawing.Point(114, 225);
-            this.textCopiedLabel.Name = "textCopiedLabel";
-            this.textCopiedLabel.Size = new System.Drawing.Size(140, 22);
-            this.textCopiedLabel.TabIndex = 14;
-            this.textCopiedLabel.Text = "Parent Name In Use";
-            this.textCopiedLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.textCopiedLabel.Visible = false;
+            resources.ApplyResources(this.ErrorLabel, "ErrorLabel");
+            this.ErrorLabel.BackColor = System.Drawing.Color.LightGray;
+            this.ErrorLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ErrorLabel.Name = "ErrorLabel";
             // 
             // BackButton
             // 
+            resources.ApplyResources(this.BackButton, "BackButton");
             this.BackButton.BackColor = System.Drawing.Color.LightGray;
             this.BackButton.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BackButton.Location = new System.Drawing.Point(0, 249);
             this.BackButton.Name = "BackButton";
-            this.BackButton.Size = new System.Drawing.Size(60, 23);
-            this.BackButton.TabIndex = 15;
-            this.BackButton.Text = "Back";
             this.BackButton.UseVisualStyleBackColor = false;
-            this.BackButton.Visible = false;
             this.BackButton.Click += new System.EventHandler(this.backButtonClick);
             // 
             // DelParentButton
             // 
+            resources.ApplyResources(this.DelParentButton, "DelParentButton");
             this.DelParentButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.DelParentButton.DialogResult = System.Windows.Forms.DialogResult.Continue;
-            this.DelParentButton.Location = new System.Drawing.Point(99, 249);
             this.DelParentButton.Name = "DelParentButton";
-            this.DelParentButton.Size = new System.Drawing.Size(169, 23);
-            this.DelParentButton.TabIndex = 17;
-            this.DelParentButton.Text = "Delete Parent";
             this.DelParentButton.UseVisualStyleBackColor = true;
-            this.DelParentButton.Visible = false;
             this.DelParentButton.Click += new System.EventHandler(this.DelParentButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(278, 169);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "label1";
             // 
             // InputParent
             // 
+            resources.ApplyResources(this.InputParent, "InputParent");
             this.InputParent.BackColor = System.Drawing.Color.LightGray;
             this.InputParent.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InputParent.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.InputParent.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InputParent.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.InputParent.Location = new System.Drawing.Point(99, 63);
-            this.InputParent.MaxLength = 45;
             this.InputParent.Name = "InputParent";
-            this.InputParent.PlaceholderText = "Input a Parent Title";
-            this.InputParent.Size = new System.Drawing.Size(159, 26);
-            this.InputParent.TabIndex = 19;
             this.InputParent.Tag = "InputType";
-            this.InputParent.Visible = false;
-            this.InputParent.WordWrap = false;
             // 
             // InputUsername
             // 
+            resources.ApplyResources(this.InputUsername, "InputUsername");
             this.InputUsername.BackColor = System.Drawing.Color.LightGray;
             this.InputUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InputUsername.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.InputUsername.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InputUsername.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.InputUsername.Location = new System.Drawing.Point(99, 95);
-            this.InputUsername.MaxLength = 45;
             this.InputUsername.Name = "InputUsername";
-            this.InputUsername.PlaceholderText = "Input Username";
-            this.InputUsername.Size = new System.Drawing.Size(159, 26);
-            this.InputUsername.TabIndex = 20;
             this.InputUsername.Tag = "InputType";
-            this.InputUsername.Visible = false;
-            this.InputUsername.WordWrap = false;
             // 
             // InputPassword
             // 
+            resources.ApplyResources(this.InputPassword, "InputPassword");
             this.InputPassword.BackColor = System.Drawing.Color.LightGray;
             this.InputPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InputPassword.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.InputPassword.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InputPassword.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.InputPassword.Location = new System.Drawing.Point(99, 127);
-            this.InputPassword.MaxLength = 45;
             this.InputPassword.Name = "InputPassword";
-            this.InputPassword.PlaceholderText = "Input Password";
-            this.InputPassword.Size = new System.Drawing.Size(159, 26);
-            this.InputPassword.TabIndex = 21;
             this.InputPassword.Tag = "InputType";
-            this.InputPassword.Visible = false;
-            this.InputPassword.WordWrap = false;
             // 
             // InputComment
             // 
+            resources.ApplyResources(this.InputComment, "InputComment");
             this.InputComment.BackColor = System.Drawing.Color.LightGray;
             this.InputComment.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.InputComment.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.InputComment.Font = new System.Drawing.Font("Arial Black", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.InputComment.ForeColor = System.Drawing.SystemColors.WindowText;
-            this.InputComment.Location = new System.Drawing.Point(99, 159);
-            this.InputComment.MaxLength = 45;
             this.InputComment.Name = "InputComment";
-            this.InputComment.PlaceholderText = "Input Comments*";
-            this.InputComment.Size = new System.Drawing.Size(159, 26);
-            this.InputComment.TabIndex = 22;
             this.InputComment.Tag = "InputType";
-            this.InputComment.Visible = false;
-            this.InputComment.WordWrap = false;
             // 
             // addItemButton
             // 
+            resources.ApplyResources(this.addItemButton, "addItemButton");
             this.addItemButton.Cursor = System.Windows.Forms.Cursors.Hand;
             this.addItemButton.DialogResult = System.Windows.Forms.DialogResult.Continue;
-            this.addItemButton.Location = new System.Drawing.Point(99, 250);
             this.addItemButton.Name = "addItemButton";
-            this.addItemButton.Size = new System.Drawing.Size(169, 23);
-            this.addItemButton.TabIndex = 23;
-            this.addItemButton.Text = "Add Item";
             this.addItemButton.UseVisualStyleBackColor = true;
-            this.addItemButton.Visible = false;
             this.addItemButton.Click += new System.EventHandler(this.addItemButton_Click);
+            // 
+            // EditInfoButton
+            // 
+            resources.ApplyResources(this.EditInfoButton, "EditInfoButton");
+            this.EditInfoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.EditInfoButton.Name = "EditInfoButton";
+            this.EditInfoButton.UseVisualStyleBackColor = true;
+            this.EditInfoButton.Click += new System.EventHandler(this.Edit_Button_clicked);
+            // 
+            // ApplyInfoButton
+            // 
+            resources.ApplyResources(this.ApplyInfoButton, "ApplyInfoButton");
+            this.ApplyInfoButton.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ApplyInfoButton.DialogResult = System.Windows.Forms.DialogResult.Continue;
+            this.ApplyInfoButton.Name = "ApplyInfoButton";
+            this.ApplyInfoButton.UseVisualStyleBackColor = true;
+            this.ApplyInfoButton.Click += new System.EventHandler(this.ApplyInfoButton_Click);
             // 
             // Index
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.ClientSize = new System.Drawing.Size(352, 298);
+            this.Controls.Add(this.ApplyInfoButton);
+            this.Controls.Add(this.EditInfoButton);
             this.Controls.Add(this.addItemButton);
             this.Controls.Add(this.InputComment);
             this.Controls.Add(this.InputPassword);
             this.Controls.Add(this.InputUsername);
             this.Controls.Add(this.InputParent);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.DelParentButton);
             this.Controls.Add(this.BackButton);
-            this.Controls.Add(this.textCopiedLabel);
+            this.Controls.Add(this.ErrorLabel);
             this.Controls.Add(this.RemoveInfoButton);
             this.Controls.Add(this.AddInfoButton);
             this.Controls.Add(this.passwordLabel);
@@ -360,11 +273,7 @@
             this.Controls.Add(this.AutoCompleteSuggestionBox);
             this.Controls.Add(this.Input1);
             this.Controls.Add(this.statusStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Index";
-            this.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Local Password Manager";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -386,14 +295,15 @@
         private Button AddInfoButton;
         private Button RemoveInfoButton;
         public System.Windows.Forms.Timer InteralClock;
-        private Label textCopiedLabel;
+        private Label ErrorLabel;
         private Button BackButton;
         private Button DelParentButton;
-        private Label label1;
         private TextBox InputParent;
         private TextBox InputUsername;
         private TextBox InputPassword;
         private TextBox InputComment;
         private Button addItemButton;
+        private Button EditInfoButton;
+        private Button ApplyInfoButton;
     }
 }
