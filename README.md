@@ -11,10 +11,10 @@ Open this file in your perferred text editor and type:
 ```json
 {
     "PlaceholderText":{
-        "username":"[laceholder",
-        "comments":"thats okay",
-        "creation-date":"bleh",
-        "last-used-date":"bleh bleh",
-        "password":"bleh!"
+        "username":"placeholder",
+        "comments":"null",
+        "creation-date":"N/A",
+        "last-used-date":"N/A",
+        "password":"password"
     }
 }
