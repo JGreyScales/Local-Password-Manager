@@ -1,7 +1,7 @@
 # Local Password Manager
 
 
-A locally stored lightly encrypted (key is on machine) password manager
+A local password manager
 
 
 To configure the program to work you must create the directory: {path}\bin\Debug\net6.0-windows
